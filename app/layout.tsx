@@ -3,6 +3,9 @@ export const metadata = {
   description: "Skincare that celebrates your natural essence",
 };
 
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
+
 import "./globals.css";
 import "./styles/cart.css";
 import "./styles/about.css";
