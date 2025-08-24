@@ -6,7 +6,7 @@ import { useRouter } from "next/navigation";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { useAuth } from "@/context/AuthContext";
-import "@/styles/auth.css"; // adjust if needed
+import "@/app/styles/auth.css"; 
 
 export default function SignupPage() {
   const router = useRouter();
