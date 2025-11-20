@@ -1,15 +1,16 @@
 import { v2 as cloudinary } from "cloudinary";
 
-if (!process.env.CLOUDINARY_CLOUD_NAME ||
-    !process.env.CLOUDINARY_API_KEY ||
-    !process.env.CLOUDINARY_API_SECRET) {
-  throw new Error("Cloudinary credentials missing");
+// 1. CRITICAL FIX: Remove the "Ghost" variable that overrides your config
+if (process.env.CLOUDINARY_URL) {
+  console.log("Found CLOUDINARY_URL, deleting it to force manual config...");
+  delete process.env.CLOUDINARY_URL;
 }
 
+// 2. Use your hardcoded test values (or env vars)
 cloudinary.config({
-  cloud_name: 'dpn8wdj2d',  
-  api_key: '376324131574764',    
-  api_secret: 'S4DO_quVmBhCnTE3QYFbTpq1aOQ', 
+  cloud_name: 'dpn8wdj2d',             // Your REAL Cloud Name
+  api_key: '376324131574764',          // Your REAL API Key
+  api_secret: process.env.CLOUDINARY_API_SECRET, // Keep this as env for security
   secure: true,
 });
 
