@@ -82,7 +82,7 @@ export default function SignupPage() {
 
   return (
     <div className="auth-page">
-      <Header />
+      {/* <Header /> */}
       <div className="auth-container">
         <div className="auth-card">
           <div className="auth-header">

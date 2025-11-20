@@ -161,7 +161,7 @@ export default function AboutPage() {
               <div className="member-image">
                 <div className="hover-reveal"></div>
               </div>
-              <h3>Claire Bennett</h3>
+              <h3>Isioma</h3>
               <p>Co-Founder & Formulator</p>
             </ScrollReveal>
             <ScrollReveal className="team-member" delay={300}>
