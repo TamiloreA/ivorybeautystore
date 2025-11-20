@@ -7,9 +7,10 @@ if (!process.env.CLOUDINARY_CLOUD_NAME ||
 }
 
 cloudinary.config({
-  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
-  api_key: process.env.CLOUDINARY_API_KEY,
-  api_secret: process.env.CLOUDINARY_API_SECRET,
+  cloud_name: 'dpn8wdj2d',  
+  api_key: '376324131574764',    
+  api_secret: 'S4DO_quVmBhCnTE3QYFbTpq1aOQ', 
+  secure: true,
 });
 
 export function uploadBufferToCloudinary(
