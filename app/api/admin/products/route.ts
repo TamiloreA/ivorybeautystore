@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import dbConnect from "@/lib/db";
 import { requireAdmin } from "@/lib/auth";
 import Product from "@/models/product";
+import "@/models/collection";
 import { uploadBufferToCloudinary } from "@/lib/cloudinary";
 
 // 1. FIX: Increase timeout to 60 seconds (Vercel default is 10s)
