@@ -702,7 +702,7 @@ header {
   width: 60%;
   height: 70%;
   background-color: var(--light-gray);
-  background-image: url('/PHOTO-2025-11-20-21-29-42.jpg');
+  background-image: none;
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;

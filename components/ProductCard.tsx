@@ -2,6 +2,7 @@
 "use client";
 
 import { useState } from "react";
+import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -32,6 +33,9 @@ export default function ProductCard({
   onAddToCart?: (id: string, qty?: number) => void | Promise<void>;
   showDescription?: boolean;
 }) {
+  const router = useRouter();
+  const auth: any = useAuth?.();
+  const [state, setState] = useState<"idle" | "loading" | "added">("idle");
   if (!product) return null;
 
   const sale = product.compareAtPrice && product.compareAtPrice > product.price;
@@ -41,11 +45,7 @@ export default function ProductCard({
       ? `₦${product.compareAtPrice.toLocaleString("en-NG", { minimumFractionDigits: 0 })}`
       : undefined;
 
-  const router = useRouter();
-  const auth: any = useAuth?.(); // tolerant to whatever your context exposes
   const isLoggedIn = Boolean(auth?.user || auth?.isAuthenticated || auth?.token || auth?.currentUser);
-
-  const [state, setState] = useState<"idle" | "loading" | "added">("idle");
 
   const handleClick = async () => {
     if (!isLoggedIn) {
@@ -77,12 +77,18 @@ export default function ProductCard({
   return (
     <Card className="market-card group overflow-hidden rounded-xl border border-border/70 bg-card/70 backdrop-blur-[1px] transition-shadow hover:shadow-[0_8px_28px_-8px_rgba(0,0,0,.45)]">
       {/* Media */}
-      <div className="relative overflow-hidden rounded-t-lg">
-        <img
+      <div className="relative h-56 md:h-64 lg:h-72 overflow-hidden rounded-t-lg">
+        <Image
           src={product.imageUrl || "/placeholder.svg"}
           alt={product.name}
-          className="w-full h-48 object-cover transition-transform duration-300 group-hover:scale-105"
-          loading="lazy"
+          fill
+          sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+          className="object-cover transition-transform duration-300 group-hover:scale-105"
+          priority={false}
+          unoptimized={Boolean(
+            (product.imageUrl || "").startsWith("http") &&
+              !(product.imageUrl || "").includes("res.cloudinary.com")
+          )}
         />
 
         {sale && (

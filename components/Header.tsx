@@ -3,22 +3,39 @@
 import { useState, useEffect } from "react";
 import { useAuth } from "@/context/AuthContext";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
+import { useRouter, usePathname } from "next/navigation";
+import { User, ShoppingCart, LogOut, Menu, X, Search } from "lucide-react";
 
 const Header = () => {
   const { user, cartCount, logout } = useAuth();
   const router = useRouter();
+  const pathname = usePathname();
   const [isMobileNavOpen, setIsMobileNavOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
 
   useEffect(() => {
-    const handleScroll = () => {
-      const scrollTop = window.scrollY;
-      setIsScrolled(scrollTop > 100);
+    let last = false;
+    let ticking = false;
+    const onScroll = () => {
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(() => {
+        const sc = window.scrollY > 100;
+        if (sc !== last) {
+          setIsScrolled(sc);
+          last = sc;
+        }
+        ticking = false;
+      });
     };
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
   }, []);
+
+  useEffect(() => {
+    setIsMobileNavOpen(false);
+    document.body.style.overflow = "";
+  }, [pathname]);
 
   const toggleMobileNav = () => {
     setIsMobileNavOpen(!isMobileNavOpen);
@@ -58,8 +75,8 @@ const Header = () => {
       <div className="search-container">
         <form onSubmit={handleSearch}>
           <input type="text" placeholder="Search products..." className="search-input" />
-          <button type="submit" className="search-btn">
-            <span className="search-icon">&#9906;</span>
+          <button type="submit" className="search-btn" aria-label="Search">
+            <Search className="search-icon" size={18} />
           </button>
         </form>
       </div>
@@ -77,26 +94,26 @@ const Header = () => {
         {user ? (
           <>
             <Link href="/profile" className="icon-btn" aria-label="Profile">
-              <i className="fas fa-user icon"></i>
+              <User className="icon" />
             </Link>
             <div className="cart-icon">
               <Link href="/cart" className="icon-btn" aria-label="Shopping cart">
-                <i className="fas fa-shopping-cart icon"></i>
+                <ShoppingCart className="icon" />
                 {cartCount > 0 && <span className="cart-count">{cartCount}</span>}
               </Link>
             </div>
             <button onClick={handleLogout} className="icon-btn" aria-label="Logout">
-              <i className="fas fa-sign-out-alt icon"></i>
+              <LogOut className="icon" />
             </button>
           </>
         ) : (
           <>
             <Link href="/login" className="icon-btn" aria-label="Sign in">
-              <i className="fas fa-user icon"></i>
+              <User className="icon" />
             </Link>
             <div className="cart-icon">
               <Link href="/cart" className="icon-btn" aria-label="Shopping cart">
-                <i className="fas fa-shopping-cart icon"></i>
+                <ShoppingCart className="icon" />
                 {cartCount > 0 && <span className="cart-count">{cartCount}</span>}
               </Link>
             </div>
@@ -104,14 +121,21 @@ const Header = () => {
         )}
       </div>
 
-      <div className="hamburger-menu" onClick={toggleMobileNav}>
-        <div className="bar"></div><div className="bar"></div><div className="bar"></div>
-      </div>
+      <button
+        className="hamburger-menu"
+        onClick={toggleMobileNav}
+        aria-label={isMobileNavOpen ? "Close menu" : "Open menu"}
+        aria-expanded={isMobileNavOpen}
+        aria-controls="mobile-nav"
+        type="button"
+      >
+        {isMobileNavOpen ? <X /> : <Menu />}
+      </button>
 
-      <div className={`mobile-nav ${isMobileNavOpen ? "active" : ""}`}>
+      <div id="mobile-nav" className={`mobile-nav ${isMobileNavOpen ? "active" : ""}`}>
         <div className="mobile-nav-header">
           <div className="logo">IVORY BEAUTY</div>
-          <div className="close-menu" onClick={closeMobileNav}>×</div>
+          <button className="close-menu" onClick={closeMobileNav} aria-label="Close menu">×</button>
         </div>
         <ul>
           <li><Link href="/" onClick={closeMobileNav}>Home</Link></li>

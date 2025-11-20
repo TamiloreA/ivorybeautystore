@@ -4,8 +4,10 @@ import { useState, useEffect } from "react";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import ProductCard from "@/components/ProductCard";
-import TestimonialSlider from "../components/TestimonialSlider";
-import BestsellersSection from "../components/BestsellersSection";
+import Image from "next/image";
+import dynamic from "next/dynamic";
+const TestimonialSlider = dynamic(() => import("../components/TestimonialSlider"));
+const BestsellersSection = dynamic(() => import("../components/BestsellersSection"));
 import ScrollReveal from "../components/ScrollReveal";
 import CustomCursor from "../components/CustomCursor";
 import Loader from "../components/Loader";
@@ -111,7 +113,7 @@ export default function Home() {
       if (circle)
         circle.style.transform = `translateY(${scrollPosition * 0.05}px)`;
     };
-    window.addEventListener("scroll", handleScroll);
+    window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
   
@@ -153,7 +155,16 @@ export default function Home() {
             data-blur
             style={{ ["--delay" as any]: "120ms" }}
           >
-            <div className="product-image" style={{ backgroundImage: "url('/IMG_2759.JPG')" }}></div>
+            <div className="product-image">
+              <Image
+                src="/PHOTO-2025-11-20-21-29-42.jpg"
+                alt="Ivory Beauty Hero"
+                fill
+                priority
+                sizes="100vw"
+                style={{ objectFit: "cover" }}
+              />
+            </div>
             <div className="circle"></div>
           </div>
         </section>

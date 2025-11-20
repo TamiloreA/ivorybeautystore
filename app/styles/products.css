@@ -21,7 +21,7 @@
   /* Products Hero Section */
   .products-hero {
     background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)),
-      url("https://images.unsplash.com/photo-1522338242992-e1a54906a8da?ixlib=rb-4.0.3") center / cover no-repeat;
+      url("/PHOTO-2025-11-20-21-29-42.jpg") center / cover no-repeat;
     height: 50vh;
     display: flex;
     align-items: center;
