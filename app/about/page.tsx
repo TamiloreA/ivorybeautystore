@@ -44,7 +44,10 @@ export default function AboutPage() {
             </p>
           </div>
           <div className="about-hero-image fade-in delay-2">
-            <div className="image-container"></div>
+            <div
+              className="image-container"
+              style={{ backgroundImage: "url('/IMG_2759.JPG')" }}
+            ></div>
           </div>
         </section>
 
@@ -68,7 +71,7 @@ export default function AboutPage() {
         {/* Founders */}
         <section className="founders">
           <ScrollReveal className="founders-image">
-            <div className="image-container"></div>
+            <div className="image-container" style={{ backgroundImage: "url('/IMG_2433.JPG')" }}></div>
           </ScrollReveal>
           <ScrollReveal className="founders-content" delay={300}>
             <h2>The Founders</h2>
@@ -147,7 +150,7 @@ export default function AboutPage() {
             </p>
           </ScrollReveal>
           <ScrollReveal className="process-image" delay={300}>
-            <div className="image-container"></div>
+            <div className="image-container" style={{ backgroundImage: "url('/IMG_2758.JPG')" }}></div>
           </ScrollReveal>
         </section>
 

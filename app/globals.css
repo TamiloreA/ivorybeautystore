@@ -702,8 +702,9 @@ header {
   width: 60%;
   height: 70%;
   background-color: var(--light-gray);
-  background-image: url("https://images.unsplash.com/photo-1596462502278-27bfdc403348?q=80&w=1000");
+  background-image: url('/PHOTO-2025-11-20-21-29-42.jpg');
   background-size: cover;
+  background-repeat: no-repeat;
   background-position: center;
   z-index: 2;
 }

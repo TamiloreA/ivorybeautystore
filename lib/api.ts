@@ -460,6 +460,15 @@ const api = {
       if (!res.ok) throw new Error("Failed to export orders");
       return await res.blob();
     },
+
+    async listCustomers() {
+      const res = await fetch(apiUrl("/admin/customers"), {
+        cache: "no-store",
+        credentials: "include",
+        ...withAuth(),
+      });
+      return parseOrThrow(res, "Failed to load customers");
+    },
   },
 
   // Generic POST

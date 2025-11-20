@@ -78,7 +78,7 @@
   }
   
   .image-container::before {
-    content: "Image Placeholder";
+    /* content: "Image Placeholder"; */
     opacity: 0.5;
   }
   

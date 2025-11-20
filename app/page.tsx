@@ -153,7 +153,7 @@ export default function Home() {
             data-blur
             style={{ ["--delay" as any]: "120ms" }}
           >
-            <div className="product-image"></div>
+            <div className="product-image" style={{ backgroundImage: "url('/IMG_2759.JPG')" }}></div>
             <div className="circle"></div>
           </div>
         </section>
@@ -209,6 +209,7 @@ export default function Home() {
             <div
               className="image-container"
               data-animate="zoom"
+              style={{ backgroundImage: "url('/IMG_1408.JPG')" }}
               data-blur
             ></div>
           </ScrollReveal>
